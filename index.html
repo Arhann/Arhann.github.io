@@ -202,6 +202,172 @@
             
 
   
+    <article id="post-post-3" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+  
+  
+    <h1 itemprop="name">
+	
+	  <a class="article-title" href="/2020/07/27/post-3/" target="_blank">post</a>
+  
+    </h1>
+  
+
+
+  
+  
+<a href="/2020/07/27/post-3/" class="archive-article-date">
+        <time datetime="2020-07-27T09:22:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-07-27</time>
+</a>
+
+  
+  
+  </header>
+  
+  <div class="article-entry" itemprop="articleBody">
+    
+    <h1 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h1><p>​    列表是python内置的<strong>可变序列</strong>，是包含若干元素的<strong>有序连续</strong>内存空间。</p>
+<p>​    形式上，列表所有元素放在一对方括号<code>[]</code>中，相邻元素之间用逗号分隔开。</p>
+<p>​    当列表增加或删除元素时，列表对象自动进行内存的扩展或收缩，从而保证元素之间没有缝隙。</p>
+<p>​    Python列表内存的自动管理会涉及列表中大量元素的移动，效率较低，并且对于某些操作可能会导致意外的错误结果。因此，除非确实有必要，否则<strong>应尽量从列表尾部进行元素的增加与删除</strong>，这会大幅度提高列表的处理速度。</p>
+<p>​    在Python中，同一个列表中元素的类型可以不相同，可以同时包含整数、实数、字符串等基本类型，也可以是列表、元组、字典、集合、以及其他自定义类型的对象。</p>
+<table>
+<thead>
+<tr>
+<th align="left">方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">list.append(x)</td>
+<td>将元素x添加到列表尾部</td>
+</tr>
+<tr>
+<td align="left">list.extend(L)</td>
+<td>将列表L中所有元素添加至列表尾部</td>
+</tr>
+<tr>
+<td align="left">list.insert(index,x)</td>
+<td>在列表指定位置index处添加元素x</td>
+</tr>
+<tr>
+<td align="left">list.remove(x)</td>
+<td>在列表中删除首次出现的指定元素</td>
+</tr>
+<tr>
+<td align="left">list.pop([index])</td>
+<td>删除并返回列表对象指定位置的元素，默认为最后一个元素</td>
+</tr>
+<tr>
+<td align="left">list.clear()</td>
+<td>删除列表中所有元素，但保留列表对象</td>
+</tr>
+<tr>
+<td align="left">list.index(x)</td>
+<td>返回第一个值为x的元素的下标，若不存在值为x的元素，则抛出异常</td>
+</tr>
+<tr>
+<td align="left">list.count(x)</td>
+<td>返回指定元素x在列表中的出现次数</td>
+</tr>
+<tr>
+<td align="left">list.reverse()</td>
+<td>对列表元素进行原地翻转</td>
+</tr>
+<tr>
+<td align="left">list.sort()</td>
+<td>对列表元素进行原地排序</td>
+</tr>
+<tr>
+<td align="left">list.copy()</td>
+<td>返回列表对象的浅复制</td>
+</tr>
+</tbody></table>
+<h4 id="列表的创建与删除"><a href="#列表的创建与删除" class="headerlink" title="列表的创建与删除"></a>列表的创建与删除</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a_list = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'123'</span>]</span><br><span class="line">&gt;&gt;&gt;a_list = []	<span class="comment">#创建空列表</span></span><br></pre></td></tr></table></figure>
+
+<p>或者也可以使用list()函数将元组、range对象、字符串或其他类型的可迭代对象类型的数据转化为列表。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a_list = list((<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>,<span class="number">11</span>))</span><br><span class="line">&gt;&gt;&gt;list(range(<span class="number">1</span>,<span class="number">10</span>,<span class="number">2</span>))</span><br><span class="line">[<span class="number">1</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">7</span>,<span class="number">9</span>]</span><br><span class="line">&gt;&gt;list(<span class="string">'hello'</span>)</span><br><span class="line">[<span class="string">'h'</span>,<span class="string">'e'</span>,<span class="string">'l'</span>,<span class="string">'l'</span>,<span class="string">'o'</span>]</span><br><span class="line">&gt;&gt;x=list()	<span class="comment">#创建空列表</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="关于range-函数"><a href="#关于range-函数" class="headerlink" title="关于range()函数"></a>关于range()函数</h4><p>range()函数的语法为 <code>range([start,]stop[,step])</code></p>
+<p>内置函数range()接受三个参数，</p>
+<p>第一个参数表示<strong>起始值</strong>（默认为0），</p>
+<p>第二个参数表示<strong>终止值</strong>（结果中不包括这个值），</p>
+<p>第三个参数表示<strong>步长</strong>（默认为1），</p>
+<p>Python3.x中返回一个range可迭代对象。</p>
+<h4 id="列表元素的增加"><a href="#列表元素的增加" class="headerlink" title="列表元素的增加"></a>列表元素的增加</h4><p>(1)可以使用 + 运算符来实现将元素添加到列表中的功能。这种用法在形式上简单，<strong>但严格意义上来讲</strong>，这并不是真的为列表添加元素，而是<strong>创建一个新列表，并将原列表中的元素和新元素依次复制到新列表的内存空间。</strong>由于涉及大量元素复制，该操作速度较慢，涉及大量元素添加时不建议使用该方法。</p>
+
+    
+
+    
+
+    
+
+  </div>
+  <div class="article-info article-info-index">
+    
+    
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">list</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">range</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+    
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/python//" class="article-tag-list-link color2">python</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+    
+    <p class="article-more-link">
+      <a class="article-more-a" href="/2020/07/27/post-3/">展开全文 >></a>
+    </p>
+    
+
+    
+    <div class="clearfix"></div>
+  </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-post-2" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -706,11 +872,19 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">hexo</a>
+                <a href="javascript:void(0)" class="js-tag color5">list</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">range</a>
               </li>
             
             <div class="clearfix"></div>
