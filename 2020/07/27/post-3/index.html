@@ -19,7 +19,7 @@
 <meta property="og:locale" content="zh">
 <meta property="og:image" content="https://arhann.github.io/2020/07/27/post-3/1.png">
 <meta property="article:published_time" content="2020-07-27T09:22:42.000Z">
-<meta property="article:modified_time" content="2020-07-29T08:38:18.983Z">
+<meta property="article:modified_time" content="2020-07-31T14:39:11.158Z">
 <meta property="article:author" content="Arhann">
 <meta property="article:tag" content="list">
 <meta property="article:tag" content="range">
@@ -311,6 +311,16 @@
 
 <p><img src="/2020/07/27/post-3/1.png" alt></p>
 <p>结果显而易见。</p>
+<h5 id="另外，"><a href="#另外，" class="headerlink" title="另外，"></a>另外，</h5><p>​    Python 采用的是基于值的自动内存管理方式，当为对象修改值时，并不是真的直接修改变量的值，而是使变量指向新的值，这对所有类型的变量都是一样的。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">&gt;&gt;&gt;id(a)</span><br><span class="line"><span class="number">20230752</span></span><br><span class="line">&gt;&gt;&gt;a=[<span class="number">1</span>,<span class="number">2</span>]</span><br><span class="line">&gt;&gt;&gt;id(a)</span><br><span class="line"><span class="number">20338208</span></span><br></pre></td></tr></table></figure>
+
+<p>​    对于列表、集合、字典等可变序列类型而言，情况稍微复杂一些。以列表为例，列表中包含的是元素值的引用，而不是直接包含元素值。如果是直接修改序列变量的值，则与Python普通变量的情况是一样的；如果是通过下标来修改序列中元素的值或通过可变序列对象自身提供的方法来增加和删除元素时，序列对象在内存中的起始地址是不变的，仅仅是被改变值的元素地址发生变化。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; a&#x3D;[1,2,4]</span><br><span class="line">&gt;&gt;&gt; b&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; a&#x3D;&#x3D;b</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; id(a)&#x3D;&#x3D;id(b)</span><br><span class="line">False</span><br><span class="line">&gt;&gt;&gt; id(a[0])&#x3D;&#x3D;id(b[0])</span><br><span class="line">True</span><br><span class="line">&gt;&gt;&gt; a&#x3D;[1,2,3]</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">61780896</span><br><span class="line">&gt;&gt;&gt; a.append(4)</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">61780896</span><br><span class="line">&gt;&gt;&gt; a.remove(3)</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">[1, 2, 4]</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">61780896</span><br><span class="line">&gt;&gt;&gt; a[0]&#x3D;5</span><br><span class="line">&gt;&gt;&gt; a</span><br><span class="line">[5, 2, 4]</span><br><span class="line">&gt;&gt;&gt; id(a)</span><br><span class="line">61780896</span><br></pre></td></tr></table></figure>
+
+<p>(3)使用列表对象的extend()方法可以将另一个迭代对象的所有元素添加至该列表对象尾部。通过extend()方法来增加列表元素也不改变其内存首地址，属于原地操作。例如：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">71117520</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a.extend([<span class="number">4</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>id(a)</span><br><span class="line"><span class="number">71117520</span></span><br></pre></td></tr></table></figure>
+
+<p>（4）使用列表对象的insert()方法可以在列表的任意位置插入元素，但由于列表的自动内存管理功能，insert()方法会涉及到插入位置之后所有元素的移动，这会影响处理速度，类似的还有remove()方法以及使用pop()函数弹出列表非尾部元素和使用del命令删除列表非尾部元素的情况。因此，除非必要，应尽量避免在列表中间位置插入和删除元素的操作，而是优先考虑使用append()方法。</p>
 
     
 
@@ -633,15 +643,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">git</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color5">list</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color1">range</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">git</a>
               </li>
             
             <div class="clearfix"></div>
